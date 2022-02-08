@@ -7,7 +7,7 @@ const Weather = (props) => {
             <p>Время</p>
             <div>
                 <img src="" alt="" />
-                <span>Город</span>
+                <span>City</span>
             </div>
             <img src="" alt="" />
             <p>Облачно</p>
