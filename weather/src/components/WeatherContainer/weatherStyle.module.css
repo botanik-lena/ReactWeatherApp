@@ -1,14 +1,42 @@
+body {
+    background-color:lightblue;
+}
+
 .weather_block {
     max-width: 500px;
     width: 100%;
-    margin: 20px auto;
-    background-color: rgb(230, 225, 225);
+    margin: 30px auto;
+    padding: 20px 0;
+    background-color: white;
     font-size: 16px;
+    font-weight: bold;
     text-align: center;
     white-space: nowrap;
+    box-shadow: 0 0 20px;
 }
 
 .containColumn {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    margin-top: 30px;
+}
+
+.preloader {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.location {
+    width: 60px;
+    position: relative;
+    top: 20px;
+}
+
+.cloudsIcon {
+    width: 30px;
+}
+
+.time {
+    font-size: 48px;
+    margin: 0;
 }
