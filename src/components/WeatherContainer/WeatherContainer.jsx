@@ -12,13 +12,14 @@ const WeatherContainer = (props) => {
 
     const [weatherObj, setWeatherObj] = useState(null);
     const [temp, setTemp] = useState();
+    const [active, setActive] = useState('celsius');
 
     const getWeather = async (latitude, longitude) => {
         const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=42a887f939302b80f3235cd0c2ff81f1`);
 
         setWeatherObj(result.data);
         const convertTempToCelsius = kelvinToCelsius(result.data.main.temp);
-        setTemp(convertTempToCelsius)
+        setTemp(convertTempToCelsius);
     };
 
     const getGeoLocation = () => {
@@ -65,19 +66,21 @@ const WeatherContainer = (props) => {
     const clickC = () => {
         const newTemp = kelvinToCelsius(weatherObj.main.temp);
         setTemp(newTemp);
+        setActive('celsius');
         return newTemp;
     }
 
     const clickF = () => {
         const newTemp = kelvinToFahrenheit(weatherObj.main.temp);
         setTemp(newTemp);
+        setActive('fahrenheit');
         return newTemp;
     }
 
 
     return (
         weatherObj 
-        ? <Weather refresh={handleClickDebounce} data={weatherObj} clickC={clickC} clickF={clickF} temp={temp}/> 
+        ? <Weather refresh={handleClickDebounce} data={weatherObj} clickC={clickC} clickF={clickF} temp={temp} active={active}/> 
         : <div className={s.preloader}><img src={preloader} alt='preloader' /></div>
     )
 };

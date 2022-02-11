@@ -21,11 +21,10 @@ const Weather = (props) => {
     console.log(props.data.weather[0].description);
 
 
-
     const [hSunrise, mSunrise] = convertTimestampToTime(sunrise);
     const [hSunset, mSunset] = convertTimestampToTime(sunset);
 
-    
+    const activeButton = props.active;
 
 
 
@@ -42,8 +41,8 @@ const Weather = (props) => {
 
             <div className={s.containColumn}>
                 <div className={s.column}>
-                    <span>Temp:  {props.temp} </span><button onClick={props.clickC}>C</button> <button onClick={props.clickF}>F</button> 
-                    <p>Pressure: {pressure}</p>
+                    <span>Temp:  {props.temp}  </span><button onClick={props.clickC} className={activeButton === 'celsius' && s.active}>C</button> <button onClick={props.clickF} className={activeButton === 'fahrenheit' && s.active}>F</button> 
+                    <p>Pressure: {pressure} hPa</p>
                     <p>Sunrise: {hSunrise}:{mSunrise}</p>
                 </div>
                 <div className={s.column}>
@@ -52,7 +51,7 @@ const Weather = (props) => {
                     <p>Sunset: {hSunset}:{mSunset}</p>
                 </div>
             </div>
-            <button onClick={props.refresh}>Reload</button>
+            <button onClick={props.refresh} className={s.reloadButton}>Reload</button>
         </div>
     );
 };
