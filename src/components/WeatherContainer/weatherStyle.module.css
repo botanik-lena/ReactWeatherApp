@@ -8,7 +8,7 @@ body {
     margin: 30px auto;
     padding: 20px 0;
     background-color: white;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     text-align: center;
     white-space: nowrap;
@@ -34,12 +34,15 @@ body {
     top: 20px;
 }
 
-.cloudsIcon {
-    width: 30px;
+.weatherIcon {
+    width: 50px;
+    position: relative;
+    top: 15px;
 }
 
 .time {
     font-size: 48px;
+    color: #1c6ee7;
     margin: 0;
 }
 

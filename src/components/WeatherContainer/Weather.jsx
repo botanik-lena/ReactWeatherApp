@@ -5,6 +5,7 @@ import { getTime } from '../../utils/getTime.js';
 import { convertTimestampToTime } from '../../utils/convertTimestampToTime.js';
 
 
+
 const Weather = (props) => {
 
     const pressure = props.data.main.pressure;
@@ -14,18 +15,15 @@ const Weather = (props) => {
     const humidity = props.data.main.humidity;
     const clouds = props.data.weather[0].description;
     const city = props.data.name;
-    const icon = props.data.weather[0].icon;
 
     const [hours, minutes] = getTime();
-
-    console.log(props.data.weather[0].description);
-
 
     const [hSunrise, mSunrise] = convertTimestampToTime(sunrise);
     const [hSunset, mSunset] = convertTimestampToTime(sunset);
 
     const activeButton = props.active;
 
+    
 
 
     return (
@@ -36,12 +34,13 @@ const Weather = (props) => {
                 <img src={location} alt="" className={s.location}/>
                 <span>{city}</span>
             </div>
-            <img src={`http://openweathermap.org/img/w/${icon}.png`} alt="icon" className={s.cloudsIcon}/>
+            <img src={props.icon} alt="icon" className={s.weatherIcon}/>
             <p>{clouds}</p>
 
             <div className={s.containColumn}>
                 <div className={s.column}>
-                    <span>Temp:  {props.temp}  </span><button onClick={props.clickC} className={activeButton === 'celsius' && s.active}>C</button> <button onClick={props.clickF} className={activeButton === 'fahrenheit' && s.active}>F</button> 
+                    <span>Temp:  {props.temp}  </span>
+                    <button onClick={props.clickC} className={activeButton === 'celsius' ? s.active : undefined}>C</button> <button onClick={props.clickF} className={activeButton === 'fahrenheit' ? s.active : undefined}>F</button> 
                     <p>Pressure: {pressure} hPa</p>
                     <p>Sunrise: {hSunrise}:{mSunrise}</p>
                 </div>

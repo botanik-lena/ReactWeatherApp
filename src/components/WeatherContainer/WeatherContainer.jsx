@@ -6,13 +6,16 @@ import preloader from '../../assets/preloader.gif';
 import s from './weatherStyle.module.css';
 import { kelvinToFahrenheit } from '../../utils/kelvinToFahrenheit.js';
 import { kelvinToCelsius } from '../../utils/kelvinToCelsius.js';
+import { getWeatherIcon } from '../../utils/getWeatherIcon.js';
 
 
-const WeatherContainer = (props) => {
+
+const WeatherContainer = () => {
 
     const [weatherObj, setWeatherObj] = useState(null);
     const [temp, setTemp] = useState();
     const [active, setActive] = useState('celsius');
+    const [icon, setIcon] = useState();
 
     const getWeather = async (latitude, longitude) => {
         const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=42a887f939302b80f3235cd0c2ff81f1`);
@@ -20,6 +23,8 @@ const WeatherContainer = (props) => {
         setWeatherObj(result.data);
         const convertTempToCelsius = kelvinToCelsius(result.data.main.temp);
         setTemp(convertTempToCelsius);
+        const icon = await getWeatherIcon(result.data.weather[0].main);
+        setIcon(icon);
     };
 
     const getGeoLocation = () => {
@@ -50,7 +55,6 @@ const WeatherContainer = (props) => {
     }, []);
     
 
-    console.log(weatherObj);
 
 
     const refresh = () => {
@@ -78,10 +82,14 @@ const WeatherContainer = (props) => {
     }
 
 
+
+
+
     return (
         weatherObj 
-        ? <Weather refresh={handleClickDebounce} data={weatherObj} clickC={clickC} clickF={clickF} temp={temp} active={active}/> 
+        ? <Weather refresh={handleClickDebounce} data={weatherObj} clickC={clickC} clickF={clickF} temp={temp} active={active} icon={icon}/> 
         : <div className={s.preloader}><img src={preloader} alt='preloader' /></div>
+
     )
 };
 
