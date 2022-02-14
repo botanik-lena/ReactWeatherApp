@@ -1,9 +1,9 @@
 import React from 'react';
 import s from './weatherStyle.module.css';
-import { getDate } from '../../utils/getDate';
+import getDate from '../../utils/getDate';
 import location from '../../assets/location.svg';
-import { getTime } from '../../utils/getTime';
-import { convertTimestampToTime } from '../../utils/convertTimestampToTime';
+import getTime from '../../utils/getTime';
+import convertTimestampToTime from '../../utils/convertTimestampToTime';
 
 function Weather({ data }, refresh, clickF, clickC, temp, active, icon) {
 	const { pressure } = data.main;
@@ -45,7 +45,7 @@ function Weather({ data }, refresh, clickF, clickC, temp, active, icon) {
 					<p>Sunset: {hSunset}:{mSunset}</p>
 				</div>
 			</div>
-			<button onClick={refresh} className={s.reloadButton}>Reload</button>
+			<button type="button" onClick={refresh} className={s.reloadButton}>Reload</button>
 		</div>
 	);
 }

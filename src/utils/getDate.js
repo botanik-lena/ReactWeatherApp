@@ -1,9 +1,6 @@
-
 const getDate = () => {
-  const options = { year: 'numeric', month: 'short', day: 'numeric' };
-    const now = new Date().toLocaleDateString('en-GB', options);
-
-    return now;
+	const options = { year: 'numeric', month: 'short', day: 'numeric' };
+	const currentDate = new Date().toLocaleDateString('en-GB', options);
+	return currentDate;
 };
-
-export { getDate };
+export default getDate;

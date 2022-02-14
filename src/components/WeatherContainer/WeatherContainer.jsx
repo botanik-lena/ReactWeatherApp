@@ -4,9 +4,9 @@ import _ from 'lodash';
 import Weather from './Weather';
 import preloader from '../../assets/preloader.gif';
 import s from './weatherStyle.module.css';
-import { kelvinToFahrenheit } from '../../utils/kelvinToFahrenheit';
-import { kelvinToCelsius } from '../../utils/kelvinToCelsius';
-import { getWeatherIcon } from '../../utils/getWeatherIcon';
+import kelvinToFahrenheit from '../../utils/kelvinToFahrenheit';
+import kelvinToCelsius from '../../utils/kelvinToCelsius';
+import getWeatherIcon from '../../utils/getWeatherIcon';
 
 function WeatherContainer() {
 	const [weatherObj, setWeatherObj] = useState(null);
@@ -22,6 +22,7 @@ function WeatherContainer() {
 		setTemp(convertTempToCelsius);
 		const icon2 = await getWeatherIcon(result.data.weather[0].main);
 		setIcon(icon2);
+		console.log(result.data);
 	};
 
 	const getGeoLocation = () => {

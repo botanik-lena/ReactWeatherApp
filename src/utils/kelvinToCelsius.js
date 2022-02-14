@@ -1,7 +1,7 @@
-
 const kelvinToCelsius = (kelvin) => {
-    const celsius = kelvin - 273;
-    return Math.round(celsius);
+	const differenceBetweenDegrees = 273;
+	const celsius = kelvin - differenceBetweenDegrees;
+	return Math.round(celsius);
 };
 
-export { kelvinToCelsius };
+export default kelvinToCelsius;

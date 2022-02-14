@@ -1,13 +1,13 @@
-import { getImagesWithTimeOfDay } from './getImagesWithTimeOfDay.js';
-import { getTime } from './getTime.js';
+import getImagesWithTimeOfDay from './getImagesWithTimeOfDay';
+import getTime from './getTime';
 
-const getWeatherIcon = async(description) => {
-    const [hours, ] = getTime();
-
-    const isDay = (hours > 3) && (hours < 17) ? true : false;
-
-    const result = getImagesWithTimeOfDay(description, isDay);
-    return result;
+const getWeatherIcon = async (description) => {
+	const [hours] = getTime();
+	const beginDay = 3;
+	const endDay = 17;
+	const isDay = (hours > beginDay) && (hours < endDay);
+	const result = getImagesWithTimeOfDay(description, isDay);
+	return result;
 };
 
-export { getWeatherIcon };
+export default getWeatherIcon;

@@ -1,9 +1,9 @@
-
-const convertTimestampToTime = (timestamp) => {
-    const time = new Date(timestamp * 1000);
-    const hours = time.getHours();
-    const minutes = time.getMinutes();
-    return [hours, minutes];
+const convertTimestampToTime = (unixTimestamp) => {
+	const utcTimestamp = unixTimestamp * 1000;
+	const time = new Date(utcTimestamp);
+	const hours = time.getHours();
+	const minutes = time.getMinutes();
+	return [hours, minutes];
 };
 
-export { convertTimestampToTime };
+export default convertTimestampToTime;
