@@ -1,17 +1,14 @@
-import { useState, useEffect } from 'react';
-import { Weather } from './Weather';
+import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 import _ from 'lodash';
+import Weather from './Weather';
 import preloader from '../../assets/preloader.gif';
 import s from './weatherStyle.module.css';
-import { kelvinToFahrenheit } from '../../utils/kelvinToFahrenheit.js';
-import { kelvinToCelsius } from '../../utils/kelvinToCelsius.js';
-import { getWeatherIcon } from '../../utils/getWeatherIcon.js';
+import { kelvinToFahrenheit } from '../../utils/kelvinToFahrenheit';
+import { kelvinToCelsius } from '../../utils/kelvinToCelsius';
+import { getWeatherIcon } from '../../utils/getWeatherIcon';
 
-
-
-const WeatherContainer = () => {
-
+function WeatherContainer() {
 	const [weatherObj, setWeatherObj] = useState(null);
 	const [temp, setTemp] = useState();
 	const [active, setActive] = useState('celsius');
@@ -23,74 +20,74 @@ const WeatherContainer = () => {
 		setWeatherObj(result.data);
 		const convertTempToCelsius = kelvinToCelsius(result.data.main.temp);
 		setTemp(convertTempToCelsius);
-		const icon = await getWeatherIcon(result.data.weather[0].main);
-		setIcon(icon);
+		const icon2 = await getWeatherIcon(result.data.weather[0].main);
+		setIcon(icon2);
 	};
 
 	const getGeoLocation = () => {
-		if ("geolocation" in navigator) {
-			function geo_success(position) {
+		if ('geolocation' in navigator) {
+			const geoSuccess = (position) => {
 				getWeather(position.coords.latitude, position.coords.longitude);
-			}
-
-			function geo_error() {
-				console.log("Нет доступа к геопозиции");
-			}
-
-			let geo_options = {
-				enableHighAccuracy: true,
-				maximumAge: 30000,
-				timeout: 27000
 			};
 
-			navigator.geolocation.watchPosition(geo_success, geo_error, geo_options);
+			const geoError = () => {
+				console.log('Нет доступа к геопозиции');
+			};
+
+			const geoOptions = {
+				enableHighAccuracy: true,
+				maximumAge: 30000,
+				timeout: 27000,
+			};
+
+			navigator.geolocation.watchPosition(geoSuccess, geoError, geoOptions);
 		} else {
 			console.log('Геопозиция недоступна');
 		}
-	}
-
+	};
 
 	useEffect(() => {
 		getGeoLocation();
 	}, []);
 
-
-
-
 	const refresh = () => {
 		getGeoLocation();
 		setTemp(weatherObj.main.temp);
 		setActive('celsius');
-	}
+	};
 
 	const handleClickDebounce = _.debounce(refresh, 2000);
-
-
 
 	const clickC = () => {
 		const newTemp = kelvinToCelsius(weatherObj.main.temp);
 		setTemp(newTemp);
 		setActive('celsius');
 		return newTemp;
-	}
+	};
 
 	const clickF = () => {
 		const newTemp = kelvinToFahrenheit(weatherObj.main.temp);
 		setTemp(newTemp);
 		setActive('fahrenheit');
 		return newTemp;
-	}
-
-
-
-
+	};
 
 	return (
 		weatherObj
-			? <Weather refresh={handleClickDebounce} data={weatherObj} clickC={clickC} clickF={clickF} temp={temp} active={active} icon={icon} />
-			: <div className={s.preloader}><img src={preloader} alt='preloader' /></div>
+			? (
+				<Weather
+					refresh={handleClickDebounce}
+					data={weatherObj}
+					clickC={clickC}
+					clickF={clickF}
+					temp={temp}
+					active={active}
+					icon={icon}
+				/>
+			)
+			: <div className={s.preloader}><img src={preloader} alt="preloader" /></div>
 
-	)
-};
+	);
+}
 
-export { WeatherContainer };
+export default WeatherContainer;

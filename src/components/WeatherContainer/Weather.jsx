@@ -1,46 +1,41 @@
+import React from 'react';
 import s from './weatherStyle.module.css';
-import { getDate } from '../../utils/getDate.js';
+import { getDate } from '../../utils/getDate';
 import location from '../../assets/location.svg';
-import { getTime } from '../../utils/getTime.js';
-import { convertTimestampToTime } from '../../utils/convertTimestampToTime.js';
+import { getTime } from '../../utils/getTime';
+import { convertTimestampToTime } from '../../utils/convertTimestampToTime';
 
-
-
-const Weather = (props) => {
-
-	const pressure = props.data.main.pressure;
-	const sunrise = props.data.sys.sunrise;
-	const sunset = props.data.sys.sunset;
-	const wind = props.data.wind.speed;
-	const humidity = props.data.main.humidity;
-	const clouds = props.data.weather[0].description;
-	const city = props.data.name;
+function Weather({ data }, refresh, clickF, clickC, temp, active, icon) {
+	const { pressure } = data.main;
+	const { sunrise, sunset } = data.sys;
+	const { wind } = data.wind.speed;
+	const { humidity } = data.main;
+	const { clouds } = data.weather[0].description;
+	const { city } = data.name;
 
 	const [hours, minutes] = getTime();
 
 	const [hSunrise, mSunrise] = convertTimestampToTime(sunrise);
 	const [hSunset, mSunset] = convertTimestampToTime(sunset);
 
-	const activeButton = props.active;
-
-
-
+	const activeButton = active;
 
 	return (
 		<div className={s.weather_block}>
 			<p>{getDate()}</p>
 			<p className={s.time}>{hours} : {minutes}</p>
 			<div>
-				<img src={location} alt="" className={s.location} />
+				<img src={location} alt="location" className={s.location} />
 				<span>{city}</span>
 			</div>
-			<img src={props.icon} alt="icon" className={s.weatherIcon} />
+			<img src={icon} alt="icon" className={s.weatherIcon} />
 			<p>{clouds}</p>
 
 			<div className={s.containColumn}>
 				<div className={s.column}>
-					<span>Temp:  {props.temp}  </span>
-					<button onClick={props.clickC} className={activeButton === 'celsius' ? s.active : undefined}>C</button> <button onClick={props.clickF} className={activeButton === 'fahrenheit' ? s.active : undefined}>F</button>
+					<span>Temp:  {temp}</span>
+					<button type="button" onClick={clickC} className={activeButton === 'celsius' ? s.active : ''}>C</button>
+					<button type="button" onClick={clickF} className={activeButton === 'fahrenheit' ? s.active : ''}>F</button>
 					<p>Pressure: {pressure} hPa</p>
 					<p>Sunrise: {hSunrise}:{mSunrise}</p>
 				</div>
@@ -50,9 +45,9 @@ const Weather = (props) => {
 					<p>Sunset: {hSunset}:{mSunset}</p>
 				</div>
 			</div>
-			<button onClick={props.refresh} className={s.reloadButton}>Reload</button>
+			<button onClick={refresh} className={s.reloadButton}>Reload</button>
 		</div>
 	);
-};
+}
 
-export { Weather };
+export default Weather;
