@@ -5,13 +5,22 @@ import location from '../../assets/location.svg';
 import getTime from '../../utils/getTime';
 import convertTimestampToTime from '../../utils/convertTimestampToTime';
 
-function Weather({ data }, refresh, clickF, clickC, temp, active, icon) {
+function Weather(props) {
+	const {
+		data,
+		refresh,
+		clickC,
+		clickF,
+		temp,
+		active,
+		icon,
+	} = props;
 	const { pressure } = data.main;
 	const { sunrise, sunset } = data.sys;
-	const { wind } = data.wind.speed;
+	const wind = data.wind.speed;
 	const { humidity } = data.main;
-	const { clouds } = data.weather[0].description;
-	const { city } = data.name;
+	const clouds = data.weather[0].description;
+	const city = data.name;
 
 	const [hours, minutes] = getTime();
 
