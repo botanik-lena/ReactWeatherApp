@@ -53,6 +53,7 @@ function WeatherContainer() {
 	const refreshPage = () => {
 		getGeoLocation();
 		setTemp(weatherResponse.main.temp);
+		setSelectedTemperatureMeasurementUnit('celsius');
 	};
 
 	const handleClickDebounce = debounce(refreshPage, 2000);
@@ -79,7 +80,7 @@ function WeatherContainer() {
 					onHandleCelsiusButtonClick={onHandleCelsiusButtonClick}
 					onHandleFahrenheitButtonClick={onHandleFahrenheitButtonClick}
 					temp={temp}
-					setSelectedTemperatureMeasurementUnit={selectedTemperatureMeasurementUnit}
+					selectedTemperatureMeasurementUnit={selectedTemperatureMeasurementUnit}
 					icon={icon}
 				/>
 			)

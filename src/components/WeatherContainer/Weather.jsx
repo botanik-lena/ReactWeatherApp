@@ -5,22 +5,22 @@ import location from '../../assets/location.svg';
 import getTime from '../../utils/getTime';
 import convertTimestampToTime from '../../utils/convertTimestampToTime';
 
-function Weather(
-	temp,
-	selectedTemperatureMeasurementUnit,
-	{ data },
-	refreshPage,
-	icon,
-	onHandleCelsiusButtonClick,
-	onHandleFahrenheitButtonClick,
-) {
+function Weather(props) {
+	const {
+		temp,
+		selectedTemperatureMeasurementUnit,
+		data,
+		refreshPage,
+		icon,
+		onHandleCelsiusButtonClick,
+		onHandleFahrenheitButtonClick,
+	} = props;
 	const { pressure } = data.main;
-	const { sunrise } = data.sys;
-	const { sunset } = data.sys;
-	const { wind } = data.wind.speed;
+	const { sunrise, sunset } = data.sys;
+	const wind = data.wind.speed;
 	const { humidity } = data.main;
-	const { clouds } = data.weather[0].description;
-	const { city } = data.name;
+	const clouds = data.weather[0].description;
+	const city = data.name;
 	const [hours, minutes] = getTime();
 	const [hSunrise, mSunrise] = convertTimestampToTime(sunrise);
 	const [hSunset, mSunset] = convertTimestampToTime(sunset);

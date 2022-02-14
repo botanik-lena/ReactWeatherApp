@@ -25,18 +25,15 @@
 			"tab"
 		],
 		"react/jsx-one-expression-per-line": "off",
-		// "react/jsx-indent-props": [
-		// 	"warn",
-		// 	"first"
-		// ]
+		"react/prop-types": [
+			0
+		],
 		"react/jsx-indent-props": [
-			[
-				"tab",
-				{
-					"indentMode": 2,
-					"ignoreTernaryOperator": true
-				}
-			]
+			1,
+			{
+				"indentMode": 2,
+				"ignoreTernaryOperator": true
+			}
 		]
 	}
 }
