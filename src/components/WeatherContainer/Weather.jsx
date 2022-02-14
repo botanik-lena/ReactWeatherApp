@@ -55,4 +55,4 @@ function Weather(props) {
 	);
 }
 
-export default Weather;
+export default React.memo(Weather);
