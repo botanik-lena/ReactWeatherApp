@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import debounce from 'lodash.debounce';
+import getWeatherAPI from '../../API/getWeatherAPI';
+import getGeolocation from '../../utils/getGeolocation';
 import Weather from './Weather';
 import preloader from '../../assets/preloader.gif';
 import s from './weatherStyle.module.css';
@@ -15,7 +16,7 @@ function WeatherContainer() {
 	const [icon, setIcon] = useState();
 
 	const getWeather = async (latitude, longitude) => {
-		const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=42a887f939302b80f3235cd0c2ff81f1`);
+		const result = await getWeatherAPI(latitude, longitude);
 
 		setWeatherResponse(result.data);
 		const convertTempToCelsius = kelvinToCelsius(result.data.main.temp);
@@ -24,34 +25,14 @@ function WeatherContainer() {
 		setIcon(iconDescription);
 	};
 
-	const getGeoLocation = () => {
-		if ('geolocation' in navigator) {
-			const geoSuccess = (position) => {
-				getWeather(position.coords.latitude, position.coords.longitude);
-			};
-
-			const geoError = () => {
-				alert('There is no access to the location.');
-			};
-
-			const geoOptions = {
-				enableHighAccuracy: true,
-				maximumAge: 30000,
-				timeout: 27000,
-			};
-
-			navigator.geolocation.watchPosition(geoSuccess, geoError, geoOptions);
-		} else {
-			alert('The location is not available.');
-		}
-	};
+	const getGeolocationWithWeather = () => getGeolocation(getWeather);
 
 	useEffect(() => {
-		getGeoLocation();
+		getGeolocationWithWeather();
 	}, []);
 
 	const refreshPage = () => {
-		getGeoLocation();
+		getGeolocationWithWeather();
 		setTemp(weatherResponse.main.temp);
 		setSelectedTemperatureMeasurementUnit('celsius');
 	};
