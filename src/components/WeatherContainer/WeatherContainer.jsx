@@ -1,96 +1,91 @@
-import { useState, useEffect } from 'react';
-import { Weather } from './Weather';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import _ from 'lodash';
+import debounce from 'lodash.debounce';
+import Weather from './Weather';
 import preloader from '../../assets/preloader.gif';
 import s from './weatherStyle.module.css';
-import { kelvinToFahrenheit } from '../../utils/kelvinToFahrenheit.js';
-import { kelvinToCelsius } from '../../utils/kelvinToCelsius.js';
-import { getWeatherIcon } from '../../utils/getWeatherIcon.js';
+import kelvinToFahrenheit from '../../utils/kelvinToFahrenheit';
+import kelvinToCelsius from '../../utils/kelvinToCelsius';
+import getWeatherIcon from '../../utils/getWeatherIcon';
 
+function WeatherContainer() {
+	const [weatherResponse, setWeatherResponse] = useState(null);
+	const [temp, setTemp] = useState();
+	const [selectedTemperatureMeasurementUnit, setSelectedTemperatureMeasurementUnit] = useState('celsius');
+	const [icon, setIcon] = useState();
 
+	const getWeather = async (latitude, longitude) => {
+		const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=42a887f939302b80f3235cd0c2ff81f1`);
 
-const WeatherContainer = () => {
+		setWeatherResponse(result.data);
+		const convertTempToCelsius = kelvinToCelsius(result.data.main.temp);
+		setTemp(convertTempToCelsius);
+		const iconDescription = await getWeatherIcon(result.data.weather[0].main);
+		setIcon(iconDescription);
+	};
 
-    const [weatherObj, setWeatherObj] = useState(null);
-    const [temp, setTemp] = useState();
-    const [active, setActive] = useState('celsius');
-    const [icon, setIcon] = useState();
+	const getGeoLocation = () => {
+		if ('geolocation' in navigator) {
+			const geoSuccess = (position) => {
+				getWeather(position.coords.latitude, position.coords.longitude);
+			};
 
-    const getWeather = async (latitude, longitude) => {
-        const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=42a887f939302b80f3235cd0c2ff81f1`);
+			const geoError = () => {
+				alert('There is no access to the location.');
+			};
 
-        setWeatherObj(result.data);
-        const convertTempToCelsius = kelvinToCelsius(result.data.main.temp);
-        setTemp(convertTempToCelsius);
-        const icon = await getWeatherIcon(result.data.weather[0].main);
-        setIcon(icon);
-    };
+			const geoOptions = {
+				enableHighAccuracy: true,
+				maximumAge: 30000,
+				timeout: 27000,
+			};
 
-    const getGeoLocation = () => {
-        if ("geolocation" in navigator) {
-            function geo_success(position) {
-                getWeather(position.coords.latitude, position.coords.longitude);
-            }
+			navigator.geolocation.watchPosition(geoSuccess, geoError, geoOptions);
+		} else {
+			alert('The location is not available.');
+		}
+	};
 
-            function geo_error() {
-                console.log("Нет доступа к геопозиции");
-            }
+	useEffect(() => {
+		getGeoLocation();
+	}, []);
 
-            let geo_options = {
-                enableHighAccuracy: true,
-                maximumAge        : 30000,
-                timeout           : 27000
-                };
+	const refreshPage = () => {
+		getGeoLocation();
+		setTemp(weatherResponse.main.temp);
+	};
 
-            navigator.geolocation.watchPosition(geo_success, geo_error, geo_options);
-        } else {
-            console.log('Геопозиция недоступна');
-        }
-    }
+	const handleClickDebounce = debounce(refreshPage, 2000);
 
-    
-    useEffect(() => {
-        getGeoLocation();
-    }, []);
-    
+	const onHandleCelsiusButtonClick = () => {
+		const newTemp = kelvinToCelsius(weatherResponse.main.temp);
+		setTemp(newTemp);
+		setSelectedTemperatureMeasurementUnit('celsius');
+		return newTemp;
+	};
+	const onHandleFahrenheitButtonClick = () => {
+		const newTemp = kelvinToFahrenheit(weatherResponse.main.temp);
+		setTemp(newTemp);
+		setSelectedTemperatureMeasurementUnit('fahrenheit');
+		return newTemp;
+	};
 
+	return (
+		weatherResponse
+			? (
+				<Weather
+					refreshPage={handleClickDebounce}
+					data={weatherResponse}
+					onHandleCelsiusButtonClick={onHandleCelsiusButtonClick}
+					onHandleFahrenheitButtonClick={onHandleFahrenheitButtonClick}
+					temp={temp}
+					setSelectedTemperatureMeasurementUnit={selectedTemperatureMeasurementUnit}
+					icon={icon}
+				/>
+			)
+			: <div className={s.preloader}><img src={preloader} alt="preloader" /></div>
 
+	);
+}
 
-    const refresh = () => {
-        getGeoLocation();
-        setTemp(weatherObj.main.temp);
-        console.log(weatherObj);
-    }
-
-    const handleClickDebounce = _.debounce(refresh, 2000);
-
-
-
-    const clickC = () => {
-        const newTemp = kelvinToCelsius(weatherObj.main.temp);
-        setTemp(newTemp);
-        setActive('celsius');
-        return newTemp;
-    }
-
-    const clickF = () => {
-        const newTemp = kelvinToFahrenheit(weatherObj.main.temp);
-        setTemp(newTemp);
-        setActive('fahrenheit');
-        return newTemp;
-    }
-
-
-
-
-
-    return (
-        weatherObj 
-        ? <Weather refresh={handleClickDebounce} data={weatherObj} clickC={clickC} clickF={clickF} temp={temp} active={active} icon={icon}/> 
-        : <div className={s.preloader}><img src={preloader} alt='preloader' /></div>
-
-    )
-};
-
-export { WeatherContainer };
+export default WeatherContainer;
