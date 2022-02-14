@@ -2,7 +2,7 @@ body {
     background-color:lightblue;
 }
 
-.weather_block {
+.weatherContainer {
     max-width: 500px;
     width: 100%;
     margin: 30px auto;
@@ -47,7 +47,7 @@ body {
 }
 
 .active {
-    background-color:rgb(64,199,129);;
+    background-color:rgb(64,199,129);
 }
 
 .reloadButton {

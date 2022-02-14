@@ -21,7 +21,7 @@ function Weather({ data }, refresh, clickF, clickC, temp, active, icon) {
 	const activeButton = active;
 
 	return (
-		<div className={s.weather_block}>
+		<div className={s.weatherContainer}>
 			<p>{getDate()}</p>
 			<p className={s.time}>{hours} : {minutes}</p>
 			<div>

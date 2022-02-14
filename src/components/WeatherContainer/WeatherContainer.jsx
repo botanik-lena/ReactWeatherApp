@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import axios from 'axios';
-import _ from 'lodash';
+import debounce from 'lodash.debounce';
 import Weather from './Weather';
 import preloader from '../../assets/preloader.gif';
 import s from './weatherStyle.module.css';
@@ -57,7 +57,7 @@ function WeatherContainer() {
 		setActive('celsius');
 	};
 
-	const handleClickDebounce = _.debounce(refresh, 2000);
+	const handleClickDebounce = debounce(refresh, 2000);
 
 	const clickC = () => {
 		const newTemp = kelvinToCelsius(weatherObj.main.temp);
