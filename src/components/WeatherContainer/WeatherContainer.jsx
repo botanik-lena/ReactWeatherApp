@@ -11,7 +11,7 @@ import getWeatherIcon from '../../utils/getWeatherIcon';
 
 function WeatherContainer() {
 	const [weatherResponse, setWeatherResponse] = useState(null);
-	const [temp, setTemp] = useState();
+	const [temperature, setTemperature] = useState();
 	const [selectedTemperatureMeasurementUnit, setSelectedTemperatureMeasurementUnit] = useState('celsius');
 	const [icon, setIcon] = useState();
 
@@ -20,7 +20,7 @@ function WeatherContainer() {
 
 		setWeatherResponse(result.data);
 		const convertTempToCelsius = kelvinToCelsius(result.data.main.temp);
-		setTemp(convertTempToCelsius);
+		setTemperature(convertTempToCelsius);
 		const iconDescription = await getWeatherIcon(result.data.weather[0].main);
 		setIcon(iconDescription);
 	};
@@ -33,7 +33,7 @@ function WeatherContainer() {
 
 	const refreshPage = () => {
 		getGeolocationWithWeather();
-		setTemp(weatherResponse.main.temp);
+		setTemperature(weatherResponse.main.temp);
 		setSelectedTemperatureMeasurementUnit('celsius');
 	};
 
@@ -41,13 +41,13 @@ function WeatherContainer() {
 
 	const onHandleCelsiusButtonClick = () => {
 		const newTemp = kelvinToCelsius(weatherResponse.main.temp);
-		setTemp(newTemp);
+		setTemperature(newTemp);
 		setSelectedTemperatureMeasurementUnit('celsius');
 		return newTemp;
 	};
 	const onHandleFahrenheitButtonClick = () => {
 		const newTemp = kelvinToFahrenheit(weatherResponse.main.temp);
-		setTemp(newTemp);
+		setTemperature(newTemp);
 		setSelectedTemperatureMeasurementUnit('fahrenheit');
 		return newTemp;
 	};
@@ -60,7 +60,7 @@ function WeatherContainer() {
 					data={weatherResponse}
 					onHandleCelsiusButtonClick={onHandleCelsiusButtonClick}
 					onHandleFahrenheitButtonClick={onHandleFahrenheitButtonClick}
-					temp={temp}
+					temperature={temperature}
 					selectedTemperatureMeasurementUnit={selectedTemperatureMeasurementUnit}
 					icon={icon}
 				/>

@@ -2,12 +2,12 @@ import React from 'react';
 import s from './weatherStyle.module.css';
 import getDate from '../../utils/getDate';
 import location from '../../assets/location.svg';
-import getTime from '../../utils/getTime';
+import getCurrentTime from '../../utils/getCurrentTime';
 import convertTimestampToTime from '../../utils/convertTimestampToTime';
 
 function Weather(props) {
 	const {
-		temp,
+		temperature,
 		selectedTemperatureMeasurementUnit,
 		data,
 		refreshPage,
@@ -17,11 +17,11 @@ function Weather(props) {
 	} = props;
 	const { pressure } = data.main;
 	const { sunrise, sunset } = data.sys;
-	const wind = data.wind.speed;
 	const { humidity } = data.main;
+	const wind = data.wind.speed;
 	const clouds = data.weather[0].description;
 	const city = data.name;
-	const [hours, minutes] = getTime();
+	const [hours, minutes] = getCurrentTime();
 	const [hSunrise, mSunrise] = convertTimestampToTime(sunrise);
 	const [hSunset, mSunset] = convertTimestampToTime(sunset);
 	const activeButton = selectedTemperatureMeasurementUnit;
@@ -38,7 +38,7 @@ function Weather(props) {
 
 			<div className={s.containColumn}>
 				<div className={s.column}>
-					<span>Temp: {temp}</span>
+					<span>Temp: {temperature}</span>
 					<button type="button" onClick={onHandleCelsiusButtonClick} className={activeButton === 'celsius' ? s.active : ''}>C</button>
 					<button type="button" onClick={onHandleFahrenheitButtonClick} className={activeButton === 'fahrenheit' ? s.active : ''}>F</button>
 					<p>Pressure: {pressure} hPa</p>

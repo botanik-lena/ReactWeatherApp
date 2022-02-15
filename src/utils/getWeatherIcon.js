@@ -1,8 +1,8 @@
 import getImagesWithTimeOfDay from './getImagesWithTimeOfDay';
-import getTime from './getTime';
+import getCurrentTime from './getCurrentTime';
 
 const getWeatherIcon = async (description) => {
-	const [hours] = getTime();
+	const [hours] = getCurrentTime();
 	const beginDay = 3;
 	const endDay = 17;
 	const isDay = (hours > beginDay) && (hours < endDay);

@@ -20,6 +20,15 @@
 	"rules": {
 		"react/jsx-indent": "off",
 		"no-tabs": "off",
+		"react/jsx-filename-extension": [
+			1,
+			{
+				"extensions": [
+					".js",
+					".jsx"
+				]
+			}
+		],
 		"indent": [
 			"warn",
 			"tab"
