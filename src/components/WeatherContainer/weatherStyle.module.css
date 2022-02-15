@@ -64,4 +64,8 @@
     transition: background-color 0.1s linear;
 }
 
-
+.windDirectionArrow {
+	width: 30px;
+	position: relative;
+	top: 5px;
+}
