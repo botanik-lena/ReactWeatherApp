@@ -1,0 +1,55 @@
+.windDirectionArrow {
+	width: 30px;
+	position: relative;
+	top: 5px;
+}
+
+.windDirectionArrow45 {
+	width: 30px;
+	position: relative;
+	top: 5px;
+	transform: rotate(45deg);
+}
+
+.windDirectionArrow90 {
+	width: 30px;
+	position: relative;
+	top: 5px;
+	transform: rotate(90deg);
+}
+
+.windDirectionArrow135 {
+	width: 30px;
+	position: relative;
+	top: 5px;
+	transform: rotate(135deg);
+}
+
+.windDirectionArrow180 {
+	width: 30px;
+	position: relative;
+	top: 5px;
+	transform: rotate(180deg);
+}
+
+.windDirectionArrow225 {
+	width: 30px;
+	position: relative;
+	top: 5px;
+	transform: rotate(-135deg);
+}
+
+.windDirectionArrow270 {
+	width: 30px;
+	position: relative;
+	top: 5px;
+	transform: rotate(-90deg);
+}
+
+.windDirectionArrow315 {
+	width: 30px;
+	position: relative;
+	top: 5px;
+	transform: rotate(-45deg);
+}
+

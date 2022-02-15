@@ -1,9 +1,12 @@
 import React from 'react';
 import s from './weatherStyle.module.css';
+import windArrowStyle from './windDirectionArrow.module.css';
 import getDate from '../../utils/getDate';
 import location from '../../assets/location.svg';
 import getCurrentTime from '../../utils/getCurrentTime';
 import convertTimestampToTime from '../../utils/convertTimestampToTime';
+import arrowImage from '../../assets/weatherIcons/arrow.png';
+import getWindDirection from '../../utils/getWindDirection';
 
 function Weather(props) {
 	const {
@@ -19,12 +22,16 @@ function Weather(props) {
 	const { sunrise, sunset } = data.sys;
 	const { humidity } = data.main;
 	const wind = data.wind.speed;
+	const { deg } = data.wind;
 	const clouds = data.weather[0].description;
 	const city = data.name;
 	const [hours, minutes] = getCurrentTime();
 	const [hSunrise, mSunrise] = convertTimestampToTime(sunrise);
 	const [hSunset, mSunset] = convertTimestampToTime(sunset);
 	const activeButton = selectedTemperatureMeasurementUnit;
+
+	const windDir = getWindDirection(deg);
+
 	return (
 		<div className={s.weatherContainer}>
 			<p>{getDate()}</p>
@@ -45,7 +52,8 @@ function Weather(props) {
 					<p>Sunrise: {hSunrise}:{mSunrise}</p>
 				</div>
 				<div className={s.column}>
-					<p>Wind: {wind} m/s</p>
+					<img src={arrowImage} alt="windDirectionArrow" className={windArrowStyle[windDir]} />
+					<span>Wind: {wind} m/s</span>
 					<p>Humidity: {humidity} %</p>
 					<p>Sunset: {hSunset}:{mSunset}</p>
 				</div>
