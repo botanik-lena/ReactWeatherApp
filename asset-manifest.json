@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/botanik-lena/ReactWeatherApp/static/css/main.23e4f360.css",
+    "main.js": "/botanik-lena/ReactWeatherApp/static/js/main.711f4f22.js",
+    "static/js/787.13d76ca7.chunk.js": "/botanik-lena/ReactWeatherApp/static/js/787.13d76ca7.chunk.js",
+    "static/media/preloader.gif": "/botanik-lena/ReactWeatherApp/static/media/preloader.7f96074cf9f6a327ac19.gif",
+    "static/media/rain-day.png": "/botanik-lena/ReactWeatherApp/static/media/rain-day.a1dadcc1ceb61eabc941.png",
+    "static/media/snow.png": "/botanik-lena/ReactWeatherApp/static/media/snow.a1bab4977c6b746bbe1b.png",
+    "static/media/mist.svg": "/botanik-lena/ReactWeatherApp/static/media/mist.2fd74df3a5ee7815a9b0db495f0cfd01.svg",
+    "static/media/thunderstorm.svg": "/botanik-lena/ReactWeatherApp/static/media/thunderstorm.1603d317003143ab4beb47857fa924ab.svg",
+    "static/media/clear-sky-night.svg": "/botanik-lena/ReactWeatherApp/static/media/clear-sky-night.3803c61d784f46f93fff1d0696580d56.svg",
+    "static/media/few-clouds.svg": "/botanik-lena/ReactWeatherApp/static/media/few-clouds.686ed46d53bf3ea0754aa92c756a3de8.svg",
+    "static/media/scattered-clouds-night.svg": "/botanik-lena/ReactWeatherApp/static/media/scattered-clouds-night.8aee36fefa0fa3f36df020d4a00c5545.svg",
+    "static/media/thunderstorm-night.svg": "/botanik-lena/ReactWeatherApp/static/media/thunderstorm-night.ff88f76bd1b4f6fa14abb67c38a9850f.svg",
+    "static/media/rain-night.svg": "/botanik-lena/ReactWeatherApp/static/media/rain-night.a322ed51edc956ab1518199ed76b40e0.svg",
+    "static/media/few-clouds-night.svg": "/botanik-lena/ReactWeatherApp/static/media/few-clouds-night.e86ae78c20705a9885b8baaec1d31f6e.svg",
+    "static/media/clear-sky.svg": "/botanik-lena/ReactWeatherApp/static/media/clear-sky.69eb5c34b41cb233eb2e7129980fce47.svg",
+    "static/media/scattered-clouds.svg": "/botanik-lena/ReactWeatherApp/static/media/scattered-clouds.d100b2c484f672980ed7b6af61fdb888.svg",
+    "static/media/location.svg": "/botanik-lena/ReactWeatherApp/static/media/location.440e2ed6593de4927c9d535e5b481891.svg",
+    "index.html": "/botanik-lena/ReactWeatherApp/index.html",
+    "main.23e4f360.css.map": "/botanik-lena/ReactWeatherApp/static/css/main.23e4f360.css.map",
+    "main.711f4f22.js.map": "/botanik-lena/ReactWeatherApp/static/js/main.711f4f22.js.map",
+    "787.13d76ca7.chunk.js.map": "/botanik-lena/ReactWeatherApp/static/js/787.13d76ca7.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.23e4f360.css",
+    "static/js/main.711f4f22.js"
+  ]
+}
