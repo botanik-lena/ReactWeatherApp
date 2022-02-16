@@ -2,6 +2,7 @@ import React from 'react';
 import s from './weatherStyle.module.css';
 import getDate from '../../utils/getDate';
 import location from '../../assets/location.svg';
+import compass from '../../assets/weatherIcons/compass.png';
 import getCurrentTime from '../../utils/getCurrentTime';
 import convertTimestampToTime from '../../utils/convertTimestampToTime';
 import arrowImage from '../../assets/weatherIcons/arrow.png';
@@ -48,6 +49,7 @@ function Weather(props) {
 					<p>Sunrise: {hSunrise}:{mSunrise}</p>
 				</div>
 				<div className={s.column}>
+					<img src={compass} alt="compass" className={s.compass} />
 					<img src={arrowImage} alt="windDirectionArrow" style={{ transform: `rotate(${degrees}deg)` }} className={s['wind-direction-arrow']} />
 					<span>Wind: {wind} m/s</span>
 					<p>Humidity: {humidity} %</p>

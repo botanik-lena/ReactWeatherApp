@@ -18,6 +18,7 @@
     justify-items: center;
     align-items: end;
     margin-top: 30px;
+		position: relative;
 }
 
 .contain-column button {
@@ -83,11 +84,21 @@
 .wind-direction-arrow {
 	width: 30px;
 	position: relative;
-	top: 5px;
+	position: absolute;
+	    top: 30px;
+    position: absolute;
+    right: 169px;
+
 }
 
 .city-name {
 	color: white;
 	font-style: italic;
 	font-size: 24px;
+}
+
+.compass {
+	width: 50px;
+	position: relative;
+  top: 20px;
 }
