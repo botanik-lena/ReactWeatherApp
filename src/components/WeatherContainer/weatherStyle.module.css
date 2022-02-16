@@ -1,18 +1,18 @@
-.weatherContainer {
+.weather-container {
     max-width: 450px;
     width: 100%;
     margin: 30px auto;
     padding: 20px 0;
 		background: linear-gradient(#7ff0ff, #008eca);
     font-size: 20px;
-    font-weight: bold;
+  	font-weight: bold;
     text-align: center;
     white-space: nowrap;
     box-shadow: 0 0 20px;
 		border-radius: 30px;
 }
 
-.containColumn {
+.contain-column {
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
@@ -20,7 +20,7 @@
     margin-top: 30px;
 }
 
-.containColumn button {
+.contain-column button {
 	margin: 0 0 0 7px;
 	box-shadow: 0 0 3px;
 	font-weight: bold;
@@ -38,7 +38,7 @@
     top: 20px;
 }
 
-.weatherIcon {
+.weather-icon {
     width: 100px;
     position: relative;
     top: 15px;
@@ -61,7 +61,7 @@
 .active:hover { background: linear-gradient(#f5ae00, #f59500) #f5ae00; }
 .active:active { background: linear-gradient(#f59500, #f5ae00) #f59500; }
 
-.reloadButton {
+.reload-button {
   display: inline-block;
   color: white;
   text-decoration: none;
@@ -77,16 +77,16 @@
   transition: 0.2s;
 }
 
-.reloadButton:hover { background: linear-gradient(#f5ae00, #f59500) #f5ae00; opacity: 100%;}
-.reloadButton:active { background: linear-gradient(#f59500, #f5ae00) #f59500; opacity: 100%;}
+.reload-button:hover { background: linear-gradient(#f5ae00, #f59500) #f5ae00; opacity: 100%;}
+.reload-button:active { background: linear-gradient(#f59500, #f5ae00) #f59500; opacity: 100%;}
 
-.windDirectionArrow {
+.wind-direction-arrow {
 	width: 30px;
 	position: relative;
 	top: 5px;
 }
 
-.cityName {
+.city-name {
 	color: white;
 	font-style: italic;
 	font-size: 24px;

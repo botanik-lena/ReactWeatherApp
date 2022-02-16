@@ -29,32 +29,32 @@ function Weather(props) {
 	const activeButton = selectedTemperatureMeasurementUnit;
 
 	return (
-		<div className={s.weatherContainer}>
+		<div className={s['weather-container']}>
 			<p>{getDate()}</p>
 			<p className={s.time}>{hours} : {minutes}</p>
 			<div>
 				<img src={location} alt="locationImage" className={s.location} />
-				<span className={s.cityName}>{city}</span>
+				<span className={s['city-name']}>{city}</span>
 			</div>
-			<img src={icon} alt={clouds} className={s.weatherIcon} />
+			<img src={icon} alt={clouds} className={s['weather-icon']} />
 			<p>{clouds}</p>
 
-			<div className={s.containColumn}>
+			<div className={s['contain-column']}>
 				<div className={s.column}>
-					<span>Temp: {temperature}</span>
+					<span>Temp: {temperature}°</span>
 					<button type="button" onClick={onHandleCelsiusButtonClick} className={activeButton === 'celsius' ? s.active : ''}>C</button>
 					<button type="button" onClick={onHandleFahrenheitButtonClick} className={activeButton === 'fahrenheit' ? s.active : ''}>F</button>
 					<p>Pressure: {pressure} hPa</p>
 					<p>Sunrise: {hSunrise}:{mSunrise}</p>
 				</div>
 				<div className={s.column}>
-					<img src={arrowImage} alt="windDirectionArrow" style={{ transform: `rotate(${degrees}deg)` }} className={s.windDirectionArrow} />
+					<img src={arrowImage} alt="windDirectionArrow" style={{ transform: `rotate(${degrees}deg)` }} className={s['wind-direction-arrow']} />
 					<span>Wind: {wind} m/s</span>
 					<p>Humidity: {humidity} %</p>
 					<p>Sunset: {hSunset}:{mSunset}</p>
 				</div>
 			</div>
-			<button type="button" onClick={refreshPage} className={s.reloadButton}>Reload</button>
+			<button type="button" onClick={refreshPage} className={s['reload-button']}>Reload</button>
 		</div>
 	);
 }

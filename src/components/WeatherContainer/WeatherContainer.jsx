@@ -51,7 +51,6 @@ function WeatherContainer() {
 		setSelectedTemperatureMeasurementUnit('fahrenheit');
 		return newTemp;
 	};
-	console.log(weatherResponse);
 
 	return (
 		weatherResponse
