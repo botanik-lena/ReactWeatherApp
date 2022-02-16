@@ -34,7 +34,7 @@ function Weather(props) {
 			<p className={s.time}>{hours} : {minutes}</p>
 			<div>
 				<img src={location} alt="locationImage" className={s.location} />
-				<span>{city}</span>
+				<span className={s.cityName}>{city}</span>
 			</div>
 			<img src={icon} alt={clouds} className={s.weatherIcon} />
 			<p>{clouds}</p>
