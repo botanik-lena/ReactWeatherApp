@@ -31,31 +31,47 @@ function Weather(props) {
 
 	return (
 		<div className={s['weather-container']}>
-			<p>{getDate()}</p>
+			<p className={s.date}>{getDate()}</p>
 			<p className={s.time}>{hours} : {minutes}</p>
 			<div>
 				<img src={location} alt="locationImage" className={s.location} />
 				<span className={s['city-name']}>{city}</span>
 			</div>
 			<img src={icon} alt={clouds} className={s['weather-icon']} />
-			<p>{clouds}</p>
+			<p className={s['clouds-description']}>{clouds}</p>
 
 			<div className={s['contain-column']}>
 				<div className={s.column}>
-					<span>Temp: {temperature}°</span>
-					<button type="button" onClick={onHandleCelsiusButtonClick} className={activeButton === 'celsius' ? s.active : ''}>C</button>
-					<button type="button" onClick={onHandleFahrenheitButtonClick} className={activeButton === 'fahrenheit' ? s.active : ''}>F</button>
-					<p>Pressure: {pressure} hPa</p>
-					<p>Sunrise: {hSunrise}:{mSunrise}</p>
+					<div className={s.headers}>
+						<p>Temp:</p>
+						<p>Pressure: </p>
+						<p>Sunrise:</p>
+					</div>
+					<div className={s.values}>
+						<span>{temperature}°</span>
+						<button type="button" onClick={onHandleCelsiusButtonClick} className={activeButton === 'celsius' ? s.active : ''}>C</button>
+						<button type="button" onClick={onHandleFahrenheitButtonClick} className={activeButton === 'fahrenheit' ? s.active : ''}>F</button>
+						<p>{pressure} hPa</p>
+						<p>{hSunrise}:{mSunrise} am</p>
+					</div>
 				</div>
+
 				<div className={s.column}>
-					<img src={compass} alt="compass" className={s.compass} />
-					<img src={arrowImage} alt="windDirectionArrow" style={{ transform: `rotate(${degrees}deg)` }} className={s['wind-direction-arrow']} />
-					<span>Wind: {wind} m/s</span>
-					<p>Humidity: {humidity} %</p>
-					<p>Sunset: {hSunset}:{mSunset}</p>
+					<div className={s.headers}>
+						<img src={compass} alt="compass" className={s.compass} />
+						<img src={arrowImage} alt="windDirectionArrow" style={{ transform: `rotate(${degrees}deg)` }} className={s['wind-direction-arrow']} />
+						<span>Wind:</span>
+						<p>Humidity:</p>
+						<p>Sunset:</p>
+					</div>
+					<div className={s.values}>
+						<p> {wind} m/s</p>
+						<p>{humidity} %</p>
+						<p>{hSunset}:{mSunset} pm</p>
+					</div>
 				</div>
 			</div>
+
 			<button type="button" onClick={refreshPage} className={s['reload-button']}>Reload</button>
 		</div>
 	);

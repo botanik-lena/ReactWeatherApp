@@ -4,8 +4,7 @@
     margin: 30px auto;
     padding: 20px 0;
 		background: linear-gradient(#7ff0ff, #008eca);
-    font-size: 20px;
-  	font-weight: bold;
+    font-size: 16px;
     text-align: center;
     white-space: nowrap;
     box-shadow: 0 0 20px;
@@ -17,7 +16,7 @@
     grid-template-columns: 1fr 1fr;
     justify-items: center;
     align-items: end;
-    margin-top: 30px;
+    margin-bottom: 30px;
 		position: relative;
 }
 
@@ -27,10 +26,35 @@
 	font-weight: bold;
 }
 
+.column {
+	display: grid;
+  grid-template-columns: 1fr 1fr;
+	column-gap: 7px;
+	justify-items: stretch;
+	align-items: end;
+	position: relative;
+}
+
+.headers {
+  font-weight: bold;
+	text-align: right;
+}
+
+.values {
+	text-align: left;
+}
 
 .preloader {
     margin-top: 50px;
     text-align: center;
+}
+
+.date {
+	font-weight: bold;
+}
+
+.clouds-description {
+	font-style: italic;
 }
 
 .location {
@@ -87,7 +111,7 @@
 	position: absolute;
 	    top: 30px;
     position: absolute;
-    right: 169px;
+    right: 158px;
 
 }
 
@@ -95,6 +119,7 @@
 	color: white;
 	font-style: italic;
 	font-size: 24px;
+	font-weight: bold;
 }
 
 .compass {
