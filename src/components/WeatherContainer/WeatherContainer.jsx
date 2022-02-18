@@ -16,6 +16,7 @@ function WeatherContainer() {
 	const [icon, setIcon] = useState();
 
 	const getWeather = async (latitude, longitude) => {
+
 		const result = await getWeatherAPI(latitude, longitude);
 
 		setWeatherResponse(result.data);

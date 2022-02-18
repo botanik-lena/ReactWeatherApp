@@ -7,8 +7,8 @@ import getCurrentTime from '../../utils/getCurrentTime';
 import convertTimestampToTime from '../../utils/convertTimestampToTime';
 import arrowImage from '../../assets/weatherIcons/arrow.png';
 
-function Weather(props) {
-	const {
+function Weather(
+	{
 		temperature,
 		selectedTemperatureMeasurementUnit,
 		data,
@@ -16,7 +16,8 @@ function Weather(props) {
 		icon,
 		onHandleCelsiusButtonClick,
 		onHandleFahrenheitButtonClick,
-	} = props;
+	},
+) {
 	const { pressure } = data.main;
 	const { sunrise, sunset } = data.sys;
 	const { humidity } = data.main;

@@ -1,10 +1,12 @@
+const FIRST_TWO_DIGIT_NUMBER = 10;
+
 const getCurrentTime = () => {
 	const currentDate = new Date();
 	const minutes = currentDate.getMinutes();
 	const hours = currentDate.getHours();
 
-	const updateHours = hours < 10 ? `0${hours}` : hours;
-	const updateMinutes = minutes < 10 ? `0${minutes}` : minutes;
+	const updateHours = hours < FIRST_TWO_DIGIT_NUMBER ? `0${hours}` : hours;
+	const updateMinutes = minutes < FIRST_TWO_DIGIT_NUMBER ? `0${minutes}` : minutes;
 
 	return [updateHours, updateMinutes];
 };
