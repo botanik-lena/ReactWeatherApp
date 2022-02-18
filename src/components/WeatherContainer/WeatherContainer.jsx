@@ -1,72 +1,80 @@
 import React, { useState, useEffect } from 'react';
 import debounce from 'lodash.debounce';
-import getWeatherAPI from '../../API/getWeatherAPI';
+import weatherRequest from '../../API/weatherRequest';
 import getGeolocation from '../../utils/getGeolocation';
 import Weather from './Weather';
 import preloader from '../../assets/preloader.gif';
-import s from './weatherStyle.module.css';
-import kelvinToFahrenheit from '../../utils/kelvinToFahrenheit';
-import kelvinToCelsius from '../../utils/kelvinToCelsius';
+import style from './weatherStyle.module.css';
+import convertKelvinToFahrenheit from '../../utils/convertKelvinToFahrenheit';
+import convertKelvinToCelsius from '../../utils/convertKelvinToCelsius';
 import getWeatherIcon from '../../utils/getWeatherIcon';
+
+const UNIT_CELSIUS = 'celsius';
+const UNIT_FAHRENHEIT = 'fahrenheit';
 
 function WeatherContainer() {
 	const [weatherResponse, setWeatherResponse] = useState(null);
 	const [temperature, setTemperature] = useState();
-	const [selectedTemperatureMeasurementUnit, setSelectedTemperatureMeasurementUnit] = useState('celsius');
-	const [icon, setIcon] = useState();
+	const [unitTemperature, setUnitTemperature] = useState(UNIT_CELSIUS);
+	const [weatherIcon, setWeatherIcon] = useState();
+	const [error, setError] = useState(null);
+
+	const handleWeatherResponse = async ({ data }) => {
+		setWeatherResponse(data);
+		const celsiusTemp = convertKelvinToCelsius(data.main.temp);
+		setTemperature(celsiusTemp);
+		const iconDescription = await getWeatherIcon(data.weather[0].main);
+		setWeatherIcon(iconDescription);
+	};
 
 	const getWeather = async (latitude, longitude) => {
-
-		const result = await getWeatherAPI(latitude, longitude);
-
-		setWeatherResponse(result.data);
-		const convertTempToCelsius = kelvinToCelsius(result.data.main.temp);
-		setTemperature(convertTempToCelsius);
-		const iconDescription = await getWeatherIcon(result.data.weather[0].main);
-		setIcon(iconDescription);
+		const result = await weatherRequest(latitude, longitude);
+		handleWeatherResponse(result);
 	};
 
 	const getGeolocationWithWeather = () => getGeolocation(getWeather);
 
 	useEffect(() => {
-		getGeolocationWithWeather();
+		getGeolocation().then(({ latitude, longitude }) => {
+			getWeather(latitude, longitude);
+		}).catch((err) => {
+			setError(err);
+		});
 	}, []);
 
 	const refreshPage = () => {
 		getGeolocationWithWeather();
 		setTemperature(weatherResponse.main.temp);
-		setSelectedTemperatureMeasurementUnit('celsius');
+		setUnitTemperature(UNIT_CELSIUS);
 	};
 
-	const handleClickDebounce = debounce(refreshPage, 2000);
+	const onHandleReloadButtonClick = debounce(refreshPage, 2000);
 
 	const onHandleCelsiusButtonClick = () => {
-		const newTemp = kelvinToCelsius(weatherResponse.main.temp);
+		const newTemp = convertKelvinToCelsius(weatherResponse.main.temp);
 		setTemperature(newTemp);
-		setSelectedTemperatureMeasurementUnit('celsius');
-		return newTemp;
+		setUnitTemperature(UNIT_CELSIUS);
 	};
 	const onHandleFahrenheitButtonClick = () => {
-		const newTemp = kelvinToFahrenheit(weatherResponse.main.temp);
+		const newTemp = convertKelvinToFahrenheit(weatherResponse.main.temp);
 		setTemperature(newTemp);
-		setSelectedTemperatureMeasurementUnit('fahrenheit');
-		return newTemp;
+		setUnitTemperature(UNIT_FAHRENHEIT);
 	};
 
 	return (
 		weatherResponse
 			? (
 				<Weather
-					refreshPage={handleClickDebounce}
+					onHandleRefreshPage={onHandleReloadButtonClick}
 					data={weatherResponse}
 					onHandleCelsiusButtonClick={onHandleCelsiusButtonClick}
 					onHandleFahrenheitButtonClick={onHandleFahrenheitButtonClick}
 					temperature={temperature}
-					selectedTemperatureMeasurementUnit={selectedTemperatureMeasurementUnit}
-					icon={icon}
+					unitTemperature={unitTemperature}
+					weatherIcon={weatherIcon}
 				/>
 			)
-			: <div className={s.preloader}><img src={preloader} alt="preloader" /></div>
+			: <div className={style.preloader}><img src={preloader} alt="preloader" /></div>
 
 	);
 }

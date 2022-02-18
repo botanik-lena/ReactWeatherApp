@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './weatherStyle.module.css';
+import style from './weatherStyle.module.css';
 import getDate from '../../utils/getDate';
 import location from '../../assets/location.svg';
 import compass from '../../assets/weatherIcons/compass.png';
@@ -10,10 +10,10 @@ import arrowImage from '../../assets/weatherIcons/arrow.png';
 function Weather(
 	{
 		temperature,
-		selectedTemperatureMeasurementUnit,
+		unitTemperature,
 		data,
-		refreshPage,
-		icon,
+		onHandleRefreshPage,
+		weatherIcon,
 		onHandleCelsiusButtonClick,
 		onHandleFahrenheitButtonClick,
 	},
@@ -28,44 +28,47 @@ function Weather(
 	const [hours, minutes] = getCurrentTime();
 	const [hSunrise, mSunrise] = convertTimestampToTime(sunrise);
 	const [hSunset, mSunset] = convertTimestampToTime(sunset);
-	const activeButton = selectedTemperatureMeasurementUnit;
+	const activeButton = unitTemperature;
+	const rotateWindArrow = {
+		transform: `rotate(${degrees}deg)`,
+	};
 
 	return (
-		<div className={s['weather-container']}>
-			<p className={s.date}>{getDate()}</p>
-			<p className={s.time}>{hours} : {minutes}</p>
+		<div className={style['weather-container']}>
+			<p className={style.date}>{getDate()}</p>
+			<p className={style.time}>{hours} : {minutes}</p>
 			<div>
-				<img src={location} alt="locationImage" className={s.location} />
-				<span className={s['city-name']}>{city}</span>
+				<img src={location} alt="locationImage" className={style.location} />
+				<span className={style['city-name']}>{city}</span>
 			</div>
-			<img src={icon} alt={clouds} className={s['weather-icon']} />
-			<p className={s['clouds-description']}>{clouds}</p>
+			<img src={weatherIcon} alt={clouds} className={style['weather-icon']} />
+			<p className={style['clouds-description']}>{clouds}</p>
 
-			<div className={s['contain-column']}>
-				<div className={s.column}>
-					<div className={s.headers}>
+			<div className={style['contain-column']}>
+				<div className={style.column}>
+					<div className={style.headers}>
 						<p>Temp:</p>
 						<p>Pressure: </p>
 						<p>Sunrise:</p>
 					</div>
-					<div className={s.values}>
+					<div className={style.values}>
 						<span>{temperature}°</span>
-						<button type="button" onClick={onHandleCelsiusButtonClick} className={activeButton === 'celsius' ? s.active : ''}>C</button>
-						<button type="button" onClick={onHandleFahrenheitButtonClick} className={activeButton === 'fahrenheit' ? s.active : ''}>F</button>
+						<button type="button" onClick={onHandleCelsiusButtonClick} className={activeButton === 'celsius' ? style.active : ''}>C</button>
+						<button type="button" onClick={onHandleFahrenheitButtonClick} className={activeButton === 'fahrenheit' ? style.active : ''}>F</button>
 						<p>{pressure} hPa</p>
 						<p>{hSunrise}:{mSunrise} am</p>
 					</div>
 				</div>
 
-				<div className={s.column}>
-					<div className={s.headers}>
-						<img src={compass} alt="compass" className={s.compass} />
-						<img src={arrowImage} alt="windDirectionArrow" style={{ transform: `rotate(${degrees}deg)` }} className={s['wind-direction-arrow']} />
+				<div className={style.column}>
+					<div className={style.headers}>
+						<img src={compass} alt="compass" className={style.compass} />
+						<img src={arrowImage} alt="windDirectionArrow" style={rotateWindArrow} className={style['wind-direction-arrow']} />
 						<span>Wind:</span>
 						<p>Humidity:</p>
 						<p>Sunset:</p>
 					</div>
-					<div className={s.values}>
+					<div className={style.values}>
 						<p> {wind} m/s</p>
 						<p>{humidity} %</p>
 						<p>{hSunset}:{mSunset} pm</p>
@@ -73,7 +76,7 @@ function Weather(
 				</div>
 			</div>
 
-			<button type="button" onClick={refreshPage} className={s['reload-button']}>Reload</button>
+			<button type="button" onClick={onHandleRefreshPage} className={style['reload-button']}>Reload</button>
 		</div>
 	);
 }

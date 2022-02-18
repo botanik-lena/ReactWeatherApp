@@ -1,23 +1,25 @@
-const getGeolocation = (getWeather) => {
+const GEO_OPTIONS = {
+	enableHighAccuracy: true,
+	maximumAge: 30000,
+	timeout: 27000,
+};
+
+const getGeolocation = () => new Promise((resolve, reject) => {
 	if ('geolocation' in navigator) {
 		const geoSuccess = (position) => {
-			getWeather(position.coords.latitude, position.coords.longitude);
+			resolve(position.coords);
 		};
 
-		const geoError = () => {
+		const geoError = (error) => {
+			reject(error.message);
 			alert('There is no access to the location.');
 		};
 
-		const geoOptions = {
-			enableHighAccuracy: true,
-			maximumAge: 30000,
-			timeout: 27000,
-		};
-
-		navigator.geolocation.watchPosition(geoSuccess, geoError, geoOptions);
+		navigator.geolocation.watchPosition(geoSuccess, geoError, GEO_OPTIONS);
 	} else {
+		reject();
 		alert('The location is not available.');
 	}
-};
+});
 
 export default getGeolocation;
