@@ -21,10 +21,10 @@ function Weather() {
 
 	const handleWeatherResponse = async ({ data }) => {
 		try {
-			setWeatherResponse(data);
-			const celsiusTemp = convertKelvinToCelsius(data.main.temp);
-			setTemperature(celsiusTemp);
 			const iconDescription = await getWeatherIcon(data.weather[0].main);
+			const celsiusTemp = convertKelvinToCelsius(data.main.temp);
+			setWeatherResponse(data);
+			setTemperature(celsiusTemp);
 			setWeatherIcon(iconDescription);
 			setUnitTemperature(UNIT.CELSIUS);
 			setIsLoading(false);
