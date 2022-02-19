@@ -1,9 +1,10 @@
 {
   "files": {
-    "main.css": "/botanik-lena/ReactWeatherApp/static/css/main.8738edd8.css",
-    "main.js": "/botanik-lena/ReactWeatherApp/static/js/main.7aaacfab.js",
+    "main.css": "/botanik-lena/ReactWeatherApp/static/css/main.82d7773b.css",
+    "main.js": "/botanik-lena/ReactWeatherApp/static/js/main.d9df1506.js",
     "static/js/787.13d76ca7.chunk.js": "/botanik-lena/ReactWeatherApp/static/js/787.13d76ca7.chunk.js",
     "static/media/preloader.gif": "/botanik-lena/ReactWeatherApp/static/media/preloader.7f96074cf9f6a327ac19.gif",
+    "static/media/compass.png": "/botanik-lena/ReactWeatherApp/static/media/compass.8835b22c601d68db88ca.png",
     "static/media/rain-day.png": "/botanik-lena/ReactWeatherApp/static/media/rain-day.a1dadcc1ceb61eabc941.png",
     "static/media/arrow.png": "/botanik-lena/ReactWeatherApp/static/media/arrow.3d36aad056cb5ed3c5f0.png",
     "static/media/snow.png": "/botanik-lena/ReactWeatherApp/static/media/snow.a1bab4977c6b746bbe1b.png",
@@ -17,12 +18,12 @@
     "static/media/clear-sky.svg": "/botanik-lena/ReactWeatherApp/static/media/clear-sky.69eb5c34b41cb233eb2e7129980fce47.svg",
     "static/media/location.svg": "/botanik-lena/ReactWeatherApp/static/media/location.440e2ed6593de4927c9d535e5b481891.svg",
     "index.html": "/botanik-lena/ReactWeatherApp/index.html",
-    "main.8738edd8.css.map": "/botanik-lena/ReactWeatherApp/static/css/main.8738edd8.css.map",
-    "main.7aaacfab.js.map": "/botanik-lena/ReactWeatherApp/static/js/main.7aaacfab.js.map",
+    "main.82d7773b.css.map": "/botanik-lena/ReactWeatherApp/static/css/main.82d7773b.css.map",
+    "main.d9df1506.js.map": "/botanik-lena/ReactWeatherApp/static/js/main.d9df1506.js.map",
     "787.13d76ca7.chunk.js.map": "/botanik-lena/ReactWeatherApp/static/js/787.13d76ca7.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8738edd8.css",
-    "static/js/main.7aaacfab.js"
+    "static/css/main.82d7773b.css",
+    "static/js/main.d9df1506.js"
   ]
 }
