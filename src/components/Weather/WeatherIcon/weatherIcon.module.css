@@ -1,0 +1,9 @@
+.clouds-description {
+	font-style: italic;
+}
+
+.weather-icon {
+    width: 100px;
+    position: relative;
+    top: 15px;
+}

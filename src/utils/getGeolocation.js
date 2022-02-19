@@ -12,13 +12,13 @@ const getGeolocation = () => new Promise((resolve, reject) => {
 
 		const geoError = (error) => {
 			reject(error.message);
-			alert('There is no access to the location.');
+			console.log('There is no access to the location.');
 		};
 
 		navigator.geolocation.watchPosition(geoSuccess, geoError, GEO_OPTIONS);
 	} else {
 		reject();
-		alert('The location is not available.');
+		console.log('The location is not available.');
 	}
 });
 
