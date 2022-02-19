@@ -3,9 +3,7 @@ import style from './weatherDescription.module.css';
 import convertTimestampToTime from '../../../utils/convertTimestampToTime';
 import compass from '../../../assets/weatherIcons/compass.png';
 import arrowImage from '../../../assets/weatherIcons/arrow.png';
-
-const UNIT_CELSIUS = 'celsius';
-const UNIT_FAHRENHEIT = 'fahrenheit';
+import UNIT from '../../../constants';
 
 function WeatherDescription({
 	temperature,
@@ -35,8 +33,8 @@ function WeatherDescription({
 					</div>
 					<div className={style.values}>
 						<span>{temperature}°</span>
-						<button type="button" onClick={onHandleCelsiusButtonClick} className={unitTemperature === UNIT_CELSIUS ? style.active : ''}>C</button>
-						<button type="button" onClick={onHandleFahrenheitButtonClick} className={unitTemperature === UNIT_FAHRENHEIT ? style.active : ''}>F</button>
+						<button type="button" onClick={onHandleCelsiusButtonClick} className={unitTemperature === UNIT.CELSIUS ? style.active : ''}>C</button>
+						<button type="button" onClick={onHandleFahrenheitButtonClick} className={unitTemperature === UNIT.FAHRENHEIT ? style.active : ''}>F</button>
 						<p>{pressure} hPa</p>
 						<p>{hSunrise}:{mSunrise} am</p>
 					</div>

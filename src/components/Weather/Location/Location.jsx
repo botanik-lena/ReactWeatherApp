@@ -5,7 +5,7 @@ import location from '../../../assets/location.svg';
 function Location({ city }) {
 	return (
 		<div>
-			<img src={location} alt="locationImage" className={style.location} />
+			<img src={location} alt="Location mark" className={style.location} />
 			<span className={style['city-name']}>{city}</span>
 		</div>
 	);

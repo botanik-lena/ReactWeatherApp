@@ -18,9 +18,8 @@ function Card(
 		onHandleFahrenheitButtonClick,
 	},
 ) {
-	const { pressure } = data.main;
+	const { pressure, humidity } = data.main;
 	const { sunrise, sunset } = data.sys;
-	const { humidity } = data.main;
 	const windSpeed = data.wind.speed;
 	const degrees = data.wind.deg;
 	const clouds = data.weather[0].description;
@@ -48,7 +47,7 @@ function Card(
 			/>
 			<Button
 				onClick={onHandleRefreshPage}
-				buttonStyle={buttonReloadStyle}
+				className={buttonReloadStyle}
 				buttonText={buttonReloadText}
 			/>
 		</div>

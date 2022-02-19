@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import debounce from 'lodash.debounce';
 import weatherRequest from '../../API/weatherRequest';
 import getGeolocation from '../../utils/getGeolocation';
@@ -9,14 +9,12 @@ import convertKelvinToFahrenheit from '../../utils/convertKelvinToFahrenheit';
 import convertKelvinToCelsius from '../../utils/convertKelvinToCelsius';
 import getWeatherIcon from '../../utils/getWeatherIcon';
 import Error from './Error/Error';
-
-const UNIT_CELSIUS = 'celsius';
-const UNIT_FAHRENHEIT = 'fahrenheit';
+import UNIT from '../../constants';
 
 function Weather() {
 	const [weatherResponse, setWeatherResponse] = useState(null);
 	const [temperature, setTemperature] = useState();
-	const [unitTemperature, setUnitTemperature] = useState(UNIT_CELSIUS);
+	const [unitTemperature, setUnitTemperature] = useState(UNIT.CELSIUS);
 	const [weatherIcon, setWeatherIcon] = useState();
 	const [error, setError] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
@@ -28,7 +26,7 @@ function Weather() {
 			setTemperature(celsiusTemp);
 			const iconDescription = await getWeatherIcon(data.weather[0].main);
 			setWeatherIcon(iconDescription);
-			setUnitTemperature(UNIT_CELSIUS);
+			setUnitTemperature(UNIT.CELSIUS);
 			setIsLoading(false);
 		} catch (err) {
 			setError(err);
@@ -44,15 +42,6 @@ function Weather() {
 		}
 	};
 
-	useEffect(() => {
-		getGeolocation().then(({ latitude, longitude }) => {
-			setIsLoading(true);
-			getWeather(latitude, longitude);
-		}).catch((err) => {
-			setError(err);
-		});
-	}, []);
-
 	const refreshPage = () => {
 		getGeolocation().then(({ latitude, longitude }) => {
 			setIsLoading(true);
@@ -62,20 +51,24 @@ function Weather() {
 		});
 	};
 
-	const onHandleReloadButtonClick = debounce(refreshPage, 2000);
+	useEffect(() => {
+		refreshPage();
+	}, []);
+
+	const onHandleReloadButtonClick = useCallback(debounce(refreshPage, 1000), [refreshPage]);
 
 	const onHandleCelsiusButtonClick = () => {
 		const newTemp = convertKelvinToCelsius(weatherResponse.main.temp);
 		setTemperature(newTemp);
-		setUnitTemperature(UNIT_CELSIUS);
+		setUnitTemperature(UNIT.CELSIUS);
 	};
 	const onHandleFahrenheitButtonClick = () => {
 		const newTemp = convertKelvinToFahrenheit(weatherResponse.main.temp);
 		setTemperature(newTemp);
-		setUnitTemperature(UNIT_FAHRENHEIT);
+		setUnitTemperature(UNIT.FAHRENHEIT);
 	};
 
-	if (error) return <Error />;
+	if (error) return <Error errorMessage={error} />;
 
 	return (
 		isLoading
