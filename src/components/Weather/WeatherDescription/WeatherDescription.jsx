@@ -42,14 +42,14 @@ function WeatherDescription({
 
 				<div className={style.column}>
 					<div className={style.headers}>
+						<img src={compass} alt="compass" className={style.compass} />
+						<img src={arrowImage} alt="windDirectionArrow" style={rotateWindArrow} className={style['wind-direction-arrow']} />
 						<span>Wind:</span>
 						<p>Humidity:</p>
 						<p>Sunset:</p>
 					</div>
 					<div className={style.values}>
 						<p> {windSpeed} m/s</p>
-						<img src={compass} alt="compass" className={style.compass} />
-						<img src={arrowImage} alt="windDirectionArrow" style={rotateWindArrow} className={style['wind-direction-arrow']} />
 						<p>{humidity} %</p>
 						<p>{hSunset}:{mSunset} pm</p>
 					</div>
