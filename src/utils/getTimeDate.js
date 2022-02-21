@@ -6,7 +6,6 @@ const getDate = () => {
 	return new Date().toLocaleDateString('en-GB', options);
 };
 
-
 const getCurrentTime = () => {
 	const currentDate = new Date();
 	const minutes = currentDate.getMinutes();
@@ -17,7 +16,6 @@ const getCurrentTime = () => {
 
 	return [updateHours, updateMinutes];
 };
-
 
 const convertTimestampToTime = (unixTimestamp) => {
 	const utcTimestamp = unixTimestamp * DIFFERENCE_SECONDS_AND_MILLISECONDS;
@@ -31,5 +29,4 @@ const convertTimestampToTime = (unixTimestamp) => {
 	return [updateHours, updateMinutes];
 };
 
-
-export default convertTimestampToTime, getDate, getCurrentTime;
+export { getDate, getCurrentTime, convertTimestampToTime };
