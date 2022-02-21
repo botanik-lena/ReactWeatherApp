@@ -10,4 +10,4 @@ function WeatherIcon({ description, weatherIconPath }) {
 	);
 }
 
-export default WeatherIcon;
+export default React.memo(WeatherIcon);

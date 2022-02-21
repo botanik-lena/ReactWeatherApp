@@ -7,8 +7,7 @@ const END_DAY = 17;
 const getWeatherIcon = async (description) => {
 	const [hours] = getCurrentTime();
 	const isDay = (hours > BEGIN_DAY) && (hours < END_DAY);
-	const result = getImagesWithTimeOfDay(description, isDay);
-	return result;
+	return getImagesWithTimeOfDay(description, isDay);
 };
 
 export default getWeatherIcon;

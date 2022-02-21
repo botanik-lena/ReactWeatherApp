@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './weatherDescription.module.css';
-import convertTimestampToTime from '../../../utils/convertTimestampToTime';
+import { convertTimestampToTime } from '../../../utils/getTimeDate';
 import compass from '../../../assets/weatherIcons/compass.png';
 import arrowImage from '../../../assets/weatherIcons/arrow.png';
 import UNIT from '../../../constants';

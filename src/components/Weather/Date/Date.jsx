@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './date.module.css';
-import getDate from '../../../utils/getDate';
+import { getDate } from '../../../utils/getTimeDate';
 
 function Date() {
 	const date = getDate();

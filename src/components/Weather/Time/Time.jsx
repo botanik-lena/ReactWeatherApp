@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './time.module.css';
-import getCurrentTime from '../../../utils/getCurrentTime';
+import { getCurrentTime } from '../../../utils/getTimeDate';
 
 function Time() {
 	const [hours, minutes] = getCurrentTime();
