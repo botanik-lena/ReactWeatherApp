@@ -10,44 +10,48 @@ import getWeatherIcon from '../../utils/getWeatherIcon';
 import Error from './Error/Error';
 import UNIT from '../../constants';
 
+const getWeather = async ({ latitude, longitude }, handleWeatherResponse, setError) => {
+	try {
+		const result = await weatherRequest(latitude, longitude);
+		await handleWeatherResponse(result);
+	} catch (err) {
+		setError(err);
+	}
+};
+
 function Weather() {
 	const [weatherResponse, setWeatherResponse] = useState(null);
 	const [temperature, setTemperature] = useState();
 	const [unitTemperature, setUnitTemperature] = useState(UNIT.CELSIUS);
 	const [weatherIcon, setWeatherIcon] = useState();
-	const [error, setError] = useState(null);
+	const [error, setError] = useState('');
 	const [isLoading, setIsLoading] = useState(true);
 
 	const handleWeatherResponse = async ({ data }) => {
 		try {
-			const iconDescription = await getWeatherIcon(data.weather[0].main);
-			const celsiusTemp = convertKelvinToCelsius(data.main.temp);
-			setWeatherResponse(data);
-			setTemperature(celsiusTemp);
-			setWeatherIcon(iconDescription);
-			setUnitTemperature(UNIT.CELSIUS);
+			if (data !== null) {
+				const iconDescription = await getWeatherIcon(data.weather[0].main);
+				const celsiusTemp = convertKelvinToCelsius(data.main.temp);
+				setWeatherResponse(data);
+				setTemperature(celsiusTemp);
+				setWeatherIcon(iconDescription);
+				setUnitTemperature(UNIT.CELSIUS);
+			} else {
+				setError('Data receipt error.');
+			}
 			setIsLoading(false);
 		} catch (err) {
 			setError(err);
 		}
 	};
 
-	const getWeather = async (latitude, longitude) => {
-		try {
-			const result = await weatherRequest(latitude, longitude);
-			handleWeatherResponse(result);
-		} catch (err) {
-			setError(err);
-		}
-	};
-
-	const refreshPage = () => {
-		getGeolocation().then(({ latitude, longitude }) => {
-			setIsLoading(true);
-			getWeather(latitude, longitude);
-		}).catch((err) => {
-			setError(err);
+	const refreshPage = async () => {
+		await getGeolocation((coords) => {
+			getWeather(coords, handleWeatherResponse, setError);
+		}, (errorMessage) => {
+			setError(errorMessage);
 		});
+		setIsLoading(true);
 	};
 
 	useEffect(() => {
@@ -67,7 +71,7 @@ function Weather() {
 		setUnitTemperature(UNIT.FAHRENHEIT);
 	};
 
-	if (error) return <Error errorMessage={error} />;
+	if (error !== '') return <Error errorMessage={error} />;
 
 	return (
 		isLoading
@@ -83,7 +87,6 @@ function Weather() {
 					weatherIcon={weatherIcon}
 				/>
 			)
-
 	);
 }
 

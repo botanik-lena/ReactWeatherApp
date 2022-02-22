@@ -4,22 +4,20 @@ const GEO_OPTIONS = {
 	timeout: 27000,
 };
 
-const getGeolocation = () => new Promise((resolve, reject) => {
+const getGeolocation = async (setCoords, setErrors) => {
 	if ('geolocation' in navigator) {
 		const geoSuccess = (position) => {
-			resolve(position.coords);
+			setCoords(position.coords);
 		};
 
-		const geoError = (error) => {
-			reject(error.message);
-			console.log('There is no access to the location.');
+		const geoError = () => {
+			setErrors('There is no access to the location.');
 		};
 
-		navigator.geolocation.watchPosition(geoSuccess, geoError, GEO_OPTIONS);
+		await navigator.geolocation.watchPosition(geoSuccess, geoError, GEO_OPTIONS);
 	} else {
-		reject();
-		console.log('The location is not available.');
+		setErrors('The location is not available.');
 	}
-});
+};
 
 export default getGeolocation;
