@@ -4,7 +4,7 @@ import weatherRequest from '../../API/weatherRequest';
 import getGeolocation from '../../utils/getGeolocation';
 import Card from './Card/Card';
 import preloader from '../../assets/preloader.gif';
-import style from './weather.module.css';
+import styles from './weather.module.css';
 import { convertKelvinToFahrenheit, convertKelvinToCelsius } from '../../utils/temperatureConversion';
 import getWeatherIcon from '../../utils/getWeatherIcon';
 import Error from './Error/Error';
@@ -15,7 +15,7 @@ const getWeather = async ({ latitude, longitude }, handleWeatherResponse, setErr
 		const result = await weatherRequest(latitude, longitude);
 		await handleWeatherResponse(result);
 	} catch (err) {
-		setError(err);
+		setError(err.message);
 	}
 };
 
@@ -41,7 +41,7 @@ function Weather() {
 			}
 			setIsLoading(false);
 		} catch (err) {
-			setError(err);
+			setError(err.message);
 		}
 	};
 
@@ -51,6 +51,7 @@ function Weather() {
 		}, (errorMessage) => {
 			setError(errorMessage);
 		});
+
 		setIsLoading(true);
 	};
 
@@ -71,11 +72,11 @@ function Weather() {
 		setUnitTemperature(UNIT.FAHRENHEIT);
 	};
 
-	if (error !== '') return <Error errorMessage={error} />;
+	if (error) return <Error errorMessage={error} />;
 
 	return (
 		isLoading
-			? <div className={style.preloader}><img src={preloader} alt="preloader" /></div>
+			? <div className={styles.preloader}><img src={preloader} alt="preloader" /></div>
 			: (
 				<Card
 					onHandleRefreshPage={onHandleReloadButtonClick}

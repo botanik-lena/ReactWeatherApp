@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './card.module.css';
+import styles from './card.module.css';
 import Date from '../Date/Date';
 import Time from '../Time/Time';
 import WeatherIcon from '../WeatherIcon/WeatherIcon';
@@ -28,7 +28,7 @@ function Card(
 	const buttonReloadText = 'Reload';
 
 	return (
-		<div className={style.card}>
+		<div className={styles.card}>
 			<Date />
 			<Time />
 			<Location city={city} />

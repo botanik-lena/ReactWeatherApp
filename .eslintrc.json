@@ -43,6 +43,7 @@
 				"indentMode": 0,
 				"ignoreTernaryOperator": true
 			}
-		]
+		],
+		"no-unused-vars": "off"
 	}
 }
